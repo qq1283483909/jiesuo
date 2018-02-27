@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box{
+				width: 426px;
+				height: 640px;
+				background-image: url(img/iphone.jpg);
+				position: absolute;
+			}
+			#tk{
+				width: 93px;
+				height: 62px;
+				position: absolute;
+				bottom: 0px;
+				left:0px;
+				cursor: pointer;
+				background-image: url(img/unlock_btn.jpg);
+				border-radius: 10px;
+			}
+			#box1{
+				width: 366px;
+				height: 64px;
+				position: absolute;
+				bottom: 33px;
+				left: 30px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				var box1 = document.getElementById("box1");
+				var box = document.getElementById("box");
+				var tk = document.getElementById("tk");
+				tk.onmousedown=function(evt){
+					var oEvent =evt||event;
+					//初始
+					var a = oEvent.clientX-box1.offsetLeft
+					document.onmousemove=function(evt){
+						oEvent=evt||event;
+						tk.style.left= oEvent.clientX-a+"px"
+						if (oEvent.clientX-a<0) {
+							tk.style.left=0
+							document.onmousemove = null;
+						} else if (oEvent.clientX-a>275) {
+							box.style.background="url(img/iphone2.jpg)"
+							tk.style.display="none"
+						}
+					}			
+					document.onmouseup=function(){
+						tk.style.left= 0+"px"
+						document.onmousemove = null;
+						document.onmouseup = null;
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<div id="box1"><div id="tk"></div></div>
+		</div>
+	</body>
+</html>
